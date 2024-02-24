@@ -1,0 +1,9 @@
+starting
+stopped
+stopping
+running
+gaming
+dancing
+danced
+plaay
+
