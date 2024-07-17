@@ -1,0 +1,60 @@
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var thirdMax = function (nums) {
+    const uniq = unique(nums.sort((a, b) => b - a));
+    return uniq.length >= 3 ? uniq[2] : uniq[0];
+};
+
+function unique(array) {
+    const out = [array[0]];
+    for (let i = 1; i < array.length; i += 1) {
+        if (array[i] === out[out.length - 1]) {
+            continue;
+        } else {
+            out.push(array[i]);
+        }
+    }
+    return out;
+}
+
+// attempt 2
+
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var thirdMax = function (nums) {
+    const uniq = slide3(nums);
+    return uniq.length >= 3 ? uniq[2] : uniq[0];
+};
+
+function slide3(array) {
+    let out = [];
+    for (let i = 0; i < array.length; i += 1) {
+        const num = array[i];
+        if (out.includes(num)) {
+            continue;
+        }
+        let j = 0;
+        while (j < 3) {
+            if (out[j] < num) {
+                break;
+            }
+            j += 1;
+        }
+        out = [...out.slice(0, j), num, ...out.slice(j)].slice(0, 3);
+    }
+    return out;
+}
+
+// 3
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var thirdMax = function (nums) {
+    const uniq = Array.from(new Set(nums)).sort((a, b) => b - a);
+    return uniq.length >= 3 ? uniq[2] : uniq[0];
+};
