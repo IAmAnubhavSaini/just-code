@@ -1,0 +1,17 @@
+func maximumLengthSubstring(s string) int {
+	var freq [128]int
+	k, left, right, maxLen, value := 2, 0, 0, 0, 'a'
+
+	for right, value = range s {
+		freq[value] += 1
+
+		for freq[value] > k {
+			freq[s[left]] -= 1
+			left += 1
+		}
+
+		maxLen = max(maxLen, right+1-left)
+	}
+
+	return maxLen
+}

@@ -1,0 +1,23 @@
+//related: 159, 340, 904
+
+func totalFruit(fruits []int) int {
+	distinct, left, right, value, maxLen := 2, 0, 0, -1, 0
+	hashmap := make(map[int]int)
+
+	for right, value = range fruits {
+		hashmap[value] = right
+
+		if len(hashmap) > distinct {
+			leftMostIndex := math.MaxInt
+			for _, val := range hashmap {
+				if leftMostIndex > val {
+					leftMostIndex = val
+				}
+			}
+			delete(hashmap, fruits[leftMostIndex])
+			left = leftMostIndex + 1
+		}
+		maxLen = max(maxLen, right+1-left)
+	}
+	return maxLen
+}
