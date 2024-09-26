@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "target": "ESNEXT", // Specify ECMAScript target version
+    "allowJs": true, // Allow processing of JS files
+    "checkJs": true, // Enable type checking for JS files
+    "declaration": true, // Emit .d.ts files
+    "emitDeclarationOnly": false, // Only emit .d.ts files, no JS output
+    "outDir": "./types", // Directory to output .d.ts files
+    "noEmit": false, // Ensure we're emitting files,
+    "types": ["node", "jasmine"], // Include node types
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext"
+  },
+  "include": [
+    "./src/**/*" // Adjust this path to where your JS files are located
+  ],
+  "exclude": ["node_modules", "globals.d.ts", "node_modules/@types/node/globals.d.ts"]
+}
