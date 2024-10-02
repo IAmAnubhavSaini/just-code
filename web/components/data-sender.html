@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Custom Data Sender</title>
+    </head>
+    <body>
+        <h1>Beautiful site</h1>
+        <section>
+            <div>news</div>
+            <div>games</div>
+            <div>movies</div>
+        </section>
+        <section>
+            <h2>actions</h2>
+            <data-sender></data-sender>
+            <data-sender></data-sender>
+        </section>
+        <template id="data-sender-template">
+            <style>
+                h2 {
+                    color: blue;
+                }
+                p {
+                    font-size: 14px;
+                    color: gray;
+                }
+                button {
+                    background-color: green;
+                    color: white;
+                    border: none;
+                    padding: 10px;
+                    cursor: pointer;
+                }
+                button:hover {
+                    background-color: darkgreen;
+                }
+            </style>
+            <h2>widget #1</h2>
+            <p>data sending widget</p>
+            <button type="button">Send Data</button>
+        </template>
+
+        <script>
+            class DataSender extends HTMLElement {
+                constructor() {
+                    super();
+                    const template = document.getElementById("data-sender-template");
+                    this.attachShadow({ mode: "open" }).appendChild(template.content.cloneNode(true));
+
+                    // Get the button element from the shadow DOM
+                    this.button = this.shadowRoot.querySelector("button");
+
+                    // Add event listener to handle clicks
+                    this.button.addEventListener("click", () => {
+                        const data = { message: "Hello, Server!" };
+                        fetch("http://localhost:9900/api/create", {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(data),
+                        })
+                            .then((response) => response.json())
+                            .then((data) => {
+                                console.log("Success:", data);
+                                alert("Data sent successfully!");
+                            })
+                            .catch((error) => {
+                                console.error("Error:", error);
+                                alert("Failed to send data.");
+                            });
+                    });
+                }
+            }
+
+            // Define the custom element
+            customElements.define("data-sender", DataSender);
+        </script>
+    </body>
+</html>
