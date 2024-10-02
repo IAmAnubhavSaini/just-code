@@ -1,0 +1,72 @@
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    #chatbot-widget {
+        min-width: 300px;
+        min-height: 400px;
+        padding: 20px;
+        background-color: lightblue;
+
+        h2 {
+            color: blue;
+        }
+        p {
+            font-size: 14px;
+            color: gray;
+        }
+        button {
+            background-color: green;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: darkgreen;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            min-width: 300px;
+            min-height: 100px;
+        }
+
+        .transcript {
+            height: 300px;
+            overflow-y: scroll;
+            padding: 10px;
+            overflow-y: scroll;
+        }
+    }
+</style>
+
+<div id="chatbot-widget">
+    <h2>widget #1 for #1 web applications</h2>
+    <p>chatbot widget</p>
+    <div class="transcript"></div>
+    <div class="chatbot-actions">
+        <div>
+            <textarea
+                type="text"
+                placeholder="Type your message here"
+                name="chatbot-textarea"
+                class="chatbot-textarea"
+                rows="4"
+                cols="50"
+                aria-expanded="false"
+            ></textarea>
+        </div>
+        <div>
+            <button
+            class="chatbot-button-send"
+            type="button"
+            onclick="widgetChatbotDoSend()"
+            >send</button>
+        </div>
+    </div>
+</div>

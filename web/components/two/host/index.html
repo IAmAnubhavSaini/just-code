@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Best site ever</title>
+
+        <style>
+            *{
+                box-sizing: border-box;
+            }
+            h1 {
+                color: blue;
+            }
+            p {
+                font-size: 14px;
+                color: gray;
+            }
+            .external-widgets {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                min-width: 500px;
+                height: min-content;
+                padding: 20px;
+
+            }
+        </style>
+    </head>
+    <body>
+        <h1>We are users' first choice application</h1>
+        <p>#1; and we only deal with number 1</p>
+
+        <div class="external-widgets">
+            <chatbot-widget id="widget-1"></chatbot-widget>
+        </div>
+
+        <script defer src="http://172.17.142.50:8001/chatbot.js"></script>
+    </body>
+</html>
