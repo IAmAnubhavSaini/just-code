@@ -1173,3 +1173,7 @@ dist-ssr/
 
 # nyc coverage
 coverage.txt
+
+# csv files in data/ directory
+data/*.csv
+data/*.csv.*
