@@ -1,6 +1,88 @@
 # dumping leetcode code here...
 
 ```javascript
+
+
+/**
+ * @param {number[]} temperatures
+ * @return {number[]}
+ */
+var dailyTemperatures = function (temperatures) {
+    const answers = temperatures.map(_ => 0);
+    const stack = [];
+    for (let i = 0; i < temperatures.length; i++) {
+        while (stack.length > 0 && temperatures[i] > temperatures[stack[stack.length - 1]]) {
+            const index = stack.pop();
+            answers[index] = i - index;
+        }
+        stack.push(i);
+    }
+    return answers;
+};
+
+/** works but fails for long input [9999 *99, 100]
+ * https://leetcode.com/problems/daily-temperatures/
+ * @param {number[]} ts
+ * @return {number[]}
+ */
+var dailyTemperatures = function (ts) {
+    const len = ts.length;
+    const answers = [];
+    for(let i = 0; i < len; i++) {
+        if(ts[i] < ts[i+1]) {
+            answers[i] = 1;
+        } else {
+            let found = false;
+            let j = i + 1;
+            while(!found && j < len) {
+                if(ts[i] < ts[j]) {
+                    found = true;
+                }
+                j++;
+            }
+            answers[i] = found ? j - i - 1 : 0;
+        }
+    }
+    return answers;
+};
+
+StockSpanner.prototype.next = function (price) {
+    let span = 1;
+
+    while (this.store.length > 0 && this.store[this.store.length - 1][1] <= price) {
+        const [lastSpan, lastPrice] = this.store.pop();
+        span += lastSpan;
+    }
+    this.store.push([span, price]);
+    return span;
+};
+
+var StockSpanner = function () {
+    //https://leetcode.com/problems/online-stock-span
+    this.store = [Infinity];
+};
+
+/** 
+ * @param {number} price
+ * @return {number}
+ */
+StockSpanner.prototype.next = function (price) {
+    // save the value
+    this.store.push(price);
+
+    let i = this.store.length - 1;
+    while (i >= 0 && this.store[i] <= price) {
+        i--;
+    }
+    return this.store.length - 1 - i;
+};
+
+/** 
+ * Your StockSpanner object will be instantiated and called as such:
+ * var obj = new StockSpanner()
+ * var param_1 = obj.next(price)
+ */
+
 /**
  * https://leetcode.com/problems/max-number-of-k-sum-pairs
  * @param {number[]} nums
